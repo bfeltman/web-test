@@ -1,0 +1,17 @@
+button {
+  border: 1px solid $green;
+  border-radius: .3rem;
+  font-size: 1.4rem;
+  outline: none;
+  padding: .7rem 1.5rem;
+
+  &.reservations {
+    font-size: 1.6rem;
+    padding: 1.4rem 3rem;
+  }
+
+  &.submit {
+    background-color: $green;
+    color: $white;
+  }
+}

@@ -9,6 +9,21 @@
 </template>
 
 <style lang="scss">
+@import './styles/_colors.scss';
+@import './styles/_buttons.scss';
+@import './styles/_datepicker.scss';
+@import './styles/_input.scss';
+@import './styles/_layout.scss';
+@import './styles/_tables.scss';
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
