@@ -65,6 +65,11 @@ export default Vue.extend({
     emitTime(selectedInventory) {
       this.$emit('update-time', selectedInventory)
     }
+  },
+  watch: {
+    availableTimes() {
+      Vue.set(this, 'selectedTime', '')
+    }
   }
 })
 </script>

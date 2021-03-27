@@ -57,6 +57,11 @@ export default Vue.extend({
     emitTime(selectedInventory: { id: number; time: string }) {
       this.$emit('update-time', selectedInventory)
     }
+  },
+  watch: {
+    inventory() {
+      Vue.set(this, 'selectedInventory', '')
+    }
   }
 })
 </script>
