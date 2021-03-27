@@ -13,65 +13,64 @@
  * as a time picker.  In this context the list can be
  * all available inventory slots or a list of all available
  * times.
+ *
+ * Interview Note: Creating this as a class component just for demonstration
+ * purposes.
  */
 import dayjs from 'dayjs'
-import Vue from 'vue'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 
 import { DATE_TIME_FORMAT } from '../Constants'
 
-export default Vue.extend({
-  props: {
-    firstReservationTime: {
-      required: true
-    },
-    lastReservationTime: {
-      required: false
-    }
-  },
+@Component({})
+export default class AvailableTimes extends Vue {
+  @Prop()
+  firstReservationTime: string
+
+  @Prop()
+  lastReservationTime: string
+
   mounted() {
     Vue.set(this, 'availableTimes', this.getAvailableReservationTimes())
-  },
-  data() {
-    return {
-      availableTimes: [],
-      selectedTime: ''
-    }
-  },
-  methods: {
-    getAvailableReservationTimes() {
-      const reservationTimes = []
-      const firstHour = parseInt(this.firstReservationTime.split(':')[0])
-      const lastHour = parseInt(this.lastReservationTime.split(':')[0])
-      const intervals = [0, 15, 30, 45]
-
-      for (let hour = firstHour; hour < lastHour; hour++) {
-        intervals.forEach(interval => {
-          reservationTimes.push(
-            dayjs()
-              .hour(hour)
-              .minute(interval)
-              .format(DATE_TIME_FORMAT.TIME_FORMAT)
-          )
-        })
-      }
-      reservationTimes.push(
-        dayjs()
-          .hour(lastHour)
-          .minute(0)
-          .format(DATE_TIME_FORMAT.TIME_FORMAT)
-      )
-      return reservationTimes
-    },
-    emitTime(selectedInventory) {
-      this.$emit('update-time', selectedInventory)
-    }
-  },
-  watch: {
-    availableTimes() {
-      Vue.set(this, 'selectedTime', '')
-    }
   }
-})
+
+  availableTimes: string[] = []
+  selectedTime = ''
+
+  getAvailableReservationTimes() {
+    const reservationTimes = []
+    const firstHour = parseInt(this.firstReservationTime.split(':')[0])
+    const lastHour = parseInt(this.lastReservationTime.split(':')[0])
+    const intervals = [0, 15, 30, 45]
+
+    for (let hour = firstHour; hour < lastHour; hour++) {
+      intervals.forEach(interval => {
+        reservationTimes.push(
+          dayjs()
+            .hour(hour)
+            .minute(interval)
+            .format(DATE_TIME_FORMAT.TIME_FORMAT)
+        )
+      })
+    }
+    reservationTimes.push(
+      dayjs()
+        .hour(lastHour)
+        .minute(0)
+        .format(DATE_TIME_FORMAT.TIME_FORMAT)
+    )
+    return reservationTimes
+  }
+
+  emitTime(selectedInventory) {
+    this.$emit('update-time', selectedInventory)
+  }
+
+  @Watch('availableTimes')
+  setSelectedTime() {
+    Vue.set(this, 'selectedTime', '')
+  }
+}
 </script>
 
 <style lang="scss" scoped>

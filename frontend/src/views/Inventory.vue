@@ -1,8 +1,10 @@
 <template>
   <div>
     <h1>Inventory</h1>
-    <div>
+    <div class="inputContainer">
+      <label for="selectedDate">Select Date</label>
       <datepicker
+        id="selectedDate"
         input-class="input"
         :value="selectedDate"
         :format="convertToString"
@@ -10,19 +12,27 @@
     </div>
     <div class="half view">
       <h3>View Inventory</h3>
-      <div class="half">
-        <inventory-times
-          class="input"
-          :inventory="availableInventory"
-          @update-time="updateStartTime"
-        />
+      <div class="half ">
+        <div class="inputContainer">
+          <label for="startTime">Start Time</label>
+          <inventory-times
+            id="startTime"
+            class="input"
+            :inventory="availableInventory"
+            @update-time="updateStartTime"
+          />
+        </div>
       </div>
       <div class="half">
-        <inventory-times
-          class="input"
-          :inventory="availableInventory"
-          @update-time="updateEndTime"
-        />
+        <div class="inputContainer">
+          <label for="endTime">End Time</label>
+          <inventory-times
+            id="endTime"
+            class="input"
+            :inventory="availableInventory"
+            @update-time="updateEndTime"
+          />
+        </div>
       </div>
       <div>
         <div v-if="inventory.length === 0">

@@ -2,39 +2,56 @@
   <div>
     <h1>Reservations</h1>
     <div>
-      <input
-        type="text"
-        class="input"
-        v-model.trim="reservation.partyName"
-        placeholder="Party Name"
-      />
+      <div class="inputContainer">
+        <label for="partyName">Party Name</label>
+        <input
+          id="partyName"
+          type="text"
+          class="input"
+          v-model.trim="reservation.partyName"
+        />
+      </div>
 
-      <input
-        type="text"
-        class="input"
-        v-model.trim="reservation.emailAddress"
-        placeholder="Email Address"
-      />
+      <div class="inputContainer">
+        <label for="emailAddress">Email Address</label>
+        <input
+          id="emailAddress"
+          type="text"
+          class="input"
+          v-model.trim="reservation.emailAddress"
+        />
+      </div>
 
-      <select class="input" v-model="reservation.partySize">
-        <option disabled value="">Select Party Size</option>
-        <option v-for="partySize in partySizes" v-bind:key="partySize">
-          {{ partySize }}
-        </option>
-        <option>{{ maximumPartySize }}+</option>
-      </select>
+      <div class="inputContainer">
+        <label for="partySize">Party Size</label>
+        <select id="partySize" class="input" v-model="reservation.partySize">
+          <option disabled value="">Select Party Size</option>
+          <option v-for="partySize in partySizes" v-bind:key="partySize">
+            {{ partySize }}
+          </option>
+          <option>{{ maximumPartySize }}+</option>
+        </select>
+      </div>
 
-      <datepicker
-        input-class="input"
-        :value="selectedDate"
-        :format="convertToString"
-      />
+      <div class="inputContainer">
+        <label for="reservationDate">Reservation Date</label>
+        <datepicker
+          id="reservationDate"
+          input-class="input"
+          :value="selectedDate"
+          :format="convertToString"
+        />
+      </div>
 
-      <inventory-times
-        class="input"
-        :inventory="availableInventory"
-        @update-time="updateSelectedTime"
-      />
+      <div class="inputContainer">
+        <label for="reservationTime">Reservation Time</label>
+        <inventory-times
+          id="reservationTime"
+          class="input"
+          :inventory="availableInventory"
+          @update-time="updateSelectedTime"
+        />
+      </div>
     </div>
 
     <div class="text" v-if="inventory.length === 0">
@@ -297,6 +314,10 @@ export default Vue.extend({
 
 .error {
   color: $red;
+}
+
+.inputContainer {
+  display: inline-block;
 }
 
 .success {

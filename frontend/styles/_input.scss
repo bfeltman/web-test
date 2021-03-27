@@ -5,6 +5,20 @@
   padding: 0.6rem 1.4rem;
 }
 
+.inputContainer {
+  position: relative;
+
+  label {
+    background-color: $white;
+    font-size: 1rem;
+    margin-left: 0.6rem;
+    padding: 0 0.4rem;
+    position: absolute;
+    top: -0.6rem;
+    z-index: 1;
+  }
+}
+
 // Hide the input arrows
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
