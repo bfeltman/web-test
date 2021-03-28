@@ -238,6 +238,11 @@ export default Vue.extend({
           await axios.put(
             `http://localhost:9090/inventory?id=${this.selectedInventoryId}`
           )
+          this.$toasted.show('Reservation Created', {
+            duration: 3000,
+            position: 'bottom-center',
+            type: 'success'
+          })
           this.initializeForm()
           // Reset the validation for the next reservation.
           Vue.set(this, 'validation', {})
@@ -246,6 +251,11 @@ export default Vue.extend({
           Vue.set(this, 'reservations', await this.getReservations())
         }
       } catch (error) {
+        this.$toasted.show('Reservation Error', {
+          duration: 3000,
+          position: 'bottom-center',
+          type: 'error'
+        })
         Vue.set(this, 'validation', { success: false, message: error.message })
       }
     },

@@ -274,8 +274,18 @@ export default Vue.extend({
       try {
         await axios.post('http://localhost:9090/inventory', reservations)
         // Refresh the inventory after it's been created.
+        this.$toasted.show('Inventory Created', {
+          duration: 3000,
+          position: 'bottom-center',
+          type: 'success'
+        })
         Vue.set(this, 'inventory', await this.getInventory())
       } catch (error) {
+        this.$toasted.show('Error Creating Inventory', {
+          duration: 3000,
+          position: 'bottom-center',
+          type: 'error'
+        })
         console.log(error.message)
       }
     },
